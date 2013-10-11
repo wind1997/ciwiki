@@ -11,6 +11,7 @@ class Add_controller extends CI_Controller {
     {
 		$data['title'] = 'Writing in Group';
 		$data['login_user'] = $this->session->userdata('username');
+		 $data['tips'] = '';
 		$this->load->view('header', $data);
 		
 		$data['add_book'] = 0;

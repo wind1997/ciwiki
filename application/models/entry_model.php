@@ -23,6 +23,22 @@ class Entry_model extends CI_Model {
             return $array;
         }
     }
+		function add_check() {
+		 $tag = 0;
+		 if($_POST['subject'] == ''){
+		 $tag = 2;
+		 }elseif($_POST['body'] == ''){
+		 $tag = 3;
+		 }else{
+		 $deadline = $_POST['deadline'];
+         $nowDate = date("Y-m-d", time());
+         $startdate = strtotime($nowDate);
+         $enddate = strtotime($deadline);
+		 if( $enddate<$startdate)
+		 $tag = 1;
+		 }
+		return $tag;
+		}
 
     function insert_entry() {
         $_POST['deadline'] = date("Y-m-d", strtotime($_POST['deadline']));

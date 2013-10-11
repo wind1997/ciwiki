@@ -1,6 +1,21 @@
 <html>
 <body>
-<?=form_open('register_controller/add')?>
+<script type="text/javascript">
+	function validate(){
+		if(document.userlog.name.value == ""){
+			alert('Please enter the Username!');
+			document.userlog.name.focus();
+			return false;
+		}
+		else if(document.userlog.password.value == ""){
+			alert('Please enter the Password!');
+			document.userlog.password.focus();
+			return false;
+		}
+	}
+</script>
+<form method="post" name="userlog"  action="register_controller/add" onsubmit='return validate()'>
+
 <table>
 	<tr>
 		<td><i><?="Username :"?></i></td>

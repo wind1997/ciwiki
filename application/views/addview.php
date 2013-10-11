@@ -13,6 +13,7 @@
         </script>
     </head>
     <body>
+	<i><?=$tips?></i><br />
     <?= form_open('edit_controller/insert') ?>
     <?php if ($add_book): ?>
         <?= form_hidden('fid', 0) ?>

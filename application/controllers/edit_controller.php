@@ -20,8 +20,19 @@ class Edit_controller extends CI_Controller {
     }
     
     function insert()
-    {
+    {	$flag = $this->Entry_model->add_check();
+	if($flag == 0){
 		$this->Entry_model->insert_entry();
+		}
+		elseif($flag == '1'){
+		 echo "<script>alert('The deadline is befroe current time!');window.location.href='../add_controller/index/0';</script>";
+		 }
+		 elseif($flag == '2'){
+		 echo "<script>alert('Please enter the Subject!');window.location.href='../add_controller/index/0';</script>";
+		 }
+		 else{
+		 echo "<script>alert('Please enter the Body!');window.location.href='../add_controller/index/0';</script>";
+		 }
 	}
     
     function update()

@@ -12,5 +12,10 @@ class Comment_controller extends CI_Controller {
         $this->load->model('Comment_model');
 		$this->Comment_model->insert_comment();
     }
+	 function drop($eid,$id)
+    {
+        $this->load->model('Comment_model');
+		$this->Comment_model->drop_comment($eid,$id);
+    }
 }
 ?>

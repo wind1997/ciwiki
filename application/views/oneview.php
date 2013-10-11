@@ -21,6 +21,16 @@
                 document.getElementById("a").innerHTML += "</p>";
             }
         </script>
+		<script type="text/javascript">
+	function ch(){
+		if(document.com.body.value == ""){
+			alert('Please enter your Comment!');
+			document.com.body.focus();
+			return false;
+		}
+		
+	}
+</script>
         <?php echo smiley_js(); ?>
     </head>
     <body>
@@ -31,6 +41,7 @@
                 <strong><?= anchor('app_controller/index/' . $item->id, ' [want to edit]') ?></strong>
 				<?php elseif ($author == $login_user || $login_user == 'wind'): ?>
                 <strong><?= anchor('edit_controller/index/' . $item->id, ' [edit]') ?></strong>
+				<strong><?= anchor('rollback_controller/index/' . $item->id, ' [rollback]') ?></strong>
 				<?php endif; ?>
 			<?php endif; ?>
 			</i></h2>
@@ -67,8 +78,12 @@
                         <i>
                             <?= "Comment#$i: by " ?><strong><?= $c_item->uname ?></strong><?= " on " ?>
                             <?= date("D jS F Y g.iA", strtotime($c_item->time)) ?>
-                            <p>
+                            <p><?php if ($c_item->uname == $login_user  or $login_user == 'wind'): ?>
+							 <strong><?= anchor('comment_controller/drop/' . $item->id .'/'.$c_item->id, ' [detete]') ?></strong><br />
                                 <?= nl2br($c_item->body) ?>
+								<?php else: ?>
+								<?= nl2br($c_item->body) ?>
+								<?php endif; ?>
                             </p>
                         </i>
                     </li>
@@ -82,15 +97,13 @@
         <?php if ($login_user): ?>
             <h3><i><?= "Leave a comment?" ?></i></h3>
             <p>
-                <?= form_open('comment_controller') ?>
+                <form method="post" action="http://localhost/ci_wiki/index.php/comment_controller" name='com' onsubmit='return ch()'>
+				
                 <?= form_hidden('eid', $item->id) ?>
             <table>
+               
                 <tr>
-                    <td><i><?= "Username :" ?></i></td>
-                    <td><input type="text" name="uname" id="uname" style="width:300px;"></td>
-                </tr>
-                <tr>
-                    <td><i><?= "Comments :" ?></i></td>
+                    <td><i><?= "Comments :" ?></i></td> 
                     <td><textarea name="body" id="body" cols="28" rows="4"></textarea><td>
                 </tr>
                 <tr>

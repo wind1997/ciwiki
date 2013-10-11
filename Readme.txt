@@ -1,0 +1,1 @@
+数据库连接ci_wiki-master\application\config\database.php
